@@ -58,6 +58,7 @@ resource "aws_instance"   "myin"  {
   instance_type =                             "t2.micro"
   key_name=                                   "deployer-key"
   security_groups=                         ["allow_tls"]
+    availability_zone =                    "ap-south-1b"
 
 connection {
     type     = "ssh"
@@ -83,10 +84,10 @@ connection {
 
 
 
-resource "aws_volume_attachment" "attachvol" {
+resource "aws_volume_attachment" "attachvol111" {
   device_name = "/dev/sdh"
-  volume_id   = "vol-0973f79a14878bb0d"
-  instance_id = "i-0fc3359eceaa7c373"
+  volume_id   = "vol-0f994276c662eb24c"
+  instance_id = "i-07f71b0bc61e77c7c"
   depends_on = [
     aws_ebs_volume.volume,
     aws_instance.myin
@@ -97,7 +98,7 @@ resource "aws_volume_attachment" "attachvol" {
 resource "null_resource" "nullremote5"  {
 
 depends_on = [
-    aws_volume_attachment.attachvol,
+    aws_volume_attachment.attachvol111,
   ]
 
 
